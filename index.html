@@ -14,26 +14,25 @@
             font-family: Arial, sans-serif;
             background-color: #f8e8e0;
             color: #333;
-        }
-        .container {
             text-align: center;
-            max-width: 600px;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 2s ease-in-out;
         }
-        h1 {
-            font-size: 2.5em;
+        .heart {
+            display: none;
+            font-size: 4em;
             color: #ff6f61;
+            animation: heartbeat 1.5s infinite;
         }
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
-        .surprise-btn {
+        .password-input {
             margin-top: 20px;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+            text-align: center;
+        }
+        .unlock-btn {
+            margin-top: 10px;
             padding: 10px 20px;
             font-size: 1em;
             color: #fff;
@@ -43,7 +42,7 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-        .surprise-btn:hover {
+        .unlock-btn:hover {
             background: #ff4d4d;
         }
         .hidden-message {
@@ -53,9 +52,14 @@
             color: #333;
             animation: fadeInMessage 2s ease-in;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         @keyframes fadeInMessage {
             from { opacity: 0; transform: translateY(10px); }
@@ -64,18 +68,29 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Bất ngờ cho em yêu ❤️</h1>
-        <p>Nhấn vào nút bên dưới để nhận bất ngờ anh dành riêng cho em!</p>
-        <button class="surprise-btn" onclick="showMessage()">Nhận bất ngờ</button>
-        <div class="hidden-message" id="message">
-            💖 Anh yêu em nhiều hơn cả những gì anh có thể nói 💖
+    <div>
+        <h1>Nhập mậtanh💖
         </div>
     </div>
 
     <script>
-        function showMessage() {
-            document.getElementById("message").style.display = "block";
+        function unlockMessage() {
+            const passwordInput = document.getElementById("password").value;
+            const correctPassword = "yeu";
+            const errorMessage = document.getElementById("error-message");
+            if (passwordInput === correctPassword) {
+                // Ẩn phần nhập mật khẩu và nút
+                document.getElementById("password").style.display = "none";
+                document.querySelector("h1").style.display = "none";
+                document.querySelector(".unlock-btn").style.display = "none";
+                errorMessage.style.display = "none"; // Ẩn thông báo lỗi
+               
+                // Hiện trái tim và thông điệp
+                document.getElementById("heart").style.display = "block";
+                document.getElementById("message").style.display = "block";
+            } else {
+                errorMessage.style.display = "block"; // Hiện thông báo lỗi
+            }
         }
     </script>
 </body>
