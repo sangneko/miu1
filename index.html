@@ -73,30 +73,44 @@
         <input type="password" id="password" class="password-input" placeholder="Nhập mật khẩu...">
         <button class="unlock-btn" onclick="unlockMessage()">Mở khóa</button>
         <div class="error-message" id="error-message">Cho em không biết thì đó là sinh nhật em đó moaaaa 💖.</div>
-        
         <div class="heart" id="heart">❤️</div>
         <div class="hidden-message" id="message">
             💖 Anh yêu em nhiều hơn cả những gì anh có thể nói 💖
         </div>
     </div>
 
+
     <script>
+     
+        document.addEventListener('keydown', function (e) {
+            if (
+                e.key === "F12" ||
+                (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) ||
+                (e.ctrlKey && e.key === 'U')
+            ) {
+                e.preventDefault();
+                alert("Không được đâu bé yêu ơi 💖");
+            }
+        });
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert("Không được đâu bé yêu ơi 💖");
+        });
+
+        
         function unlockMessage() {
-            const passwordInput = document.getElementById("password").value;
-            const correctPassword = "992007";
-            const errorMessage = document.getElementById("error-message");
-            if (passwordInput === correctPassword) {
-                // Ẩn phần nhập mật khẩu và nút
+            const p = document.getElementById("password").value;
+            const correct = "992007";
+            const error = document.getElementById("error-message");
+            if (p === correct) {
                 document.getElementById("password").style.display = "none";
                 document.querySelector("h1").style.display = "none";
                 document.querySelector(".unlock-btn").style.display = "none";
-                errorMessage.style.display = "none"; // Ẩn thông báo lỗi
-               
-                // Hiện trái tim và thông điệp
+                error.style.display = "none";
                 document.getElementById("heart").style.display = "block";
                 document.getElementById("message").style.display = "block";
             } else {
-                errorMessage.style.display = "block"; // Hiện thông báo lỗi
+                error.style.display = "block";
             }
         }
     </script>
